@@ -19,9 +19,11 @@ func Fuzzy_compare(hash1,hash2 string) (result int)  {
 	ch1:=C.CString(hash1)
 	ch2:=C.CString(hash2)
 
-	hashSimilarity:=C.fuzzy_compare(ch1,ch2)
+	var hashSimilarity C.int
+	hashSimilarity=-1
+	hashSimilarity=C.fuzzy_compare(ch1,ch2)
 
-	fmt.Println(hashSimilarity)
+	//fmt.Println(hashSimilarity)
 
 	return int(hashSimilarity)
 
@@ -37,9 +39,8 @@ func Fuzzy_hash_file(filepath string) (filehash string) {
 
 	fp:=C.fopen(filename,cmode)
 	ret:=C.fuzzy_hash_file(fp,result)
-	if (ret==0) {
-		fmt.Println(C.GoString(result))
 
+	if (ret==0) {
 		return C.GoString(result)
 	}else {
 		return ""
