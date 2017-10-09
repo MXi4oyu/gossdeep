@@ -1,4 +1,4 @@
-package api
+package deepapi
 /*
 #cgo CFLAGS: -I ./include
 #cgo LDFLAGS: -L ./lib -lfuzzy
