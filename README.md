@@ -13,10 +13,10 @@
 
 ### error while loading shared libraries: libfuzzy.so.2
 <p>
-	将/usr/local/lib/ 加入到动态链接库的路径
-	echo "/usr/local/lib/" >> vi /etc/ld.so.conf
-	更新一下新的库文件
-	sudo ldconfig
+* 将/usr/local/lib/ 加入到动态链接库的路径
+* echo "/usr/local/lib/" >> vi /etc/ld.so.conf
+* 更新一下新的库文件
+* sudo ldconfig
 </p>
 
 #### https://ssdeep-project.github.io/ssdeep/doc/api/html/fuzzy_8h.html
