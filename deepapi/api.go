@@ -19,13 +19,14 @@ func Fuzzy_compare(hash1,hash2 string) (result int)  {
 	ch1:=C.CString(hash1)
 	ch2:=C.CString(hash2)
 
-	hashSimilarity:=0
+	var hashSimilarity C.int
+	hashSimilarity=0
 	hashSimilarity=C.fuzzy_compare(ch1,ch2)
 
 	if(hashSimilarity>0){
-		return hashSimilarity
+		return int(hashSimilarity)
 	}else{
-		return 0;
+		return int(0);
 	}
 
 
