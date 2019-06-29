@@ -11,6 +11,8 @@ import "C"
 import (
 	"fmt"
 	"unsafe"
+	"os"
+	"log"
 )
 
 //相似度
@@ -37,6 +39,21 @@ func Fuzzy_compare(hash1,hash2 string) (result int)  {
 func Fuzzy_hash_file(filepath string) (filehash string) {
 	result:=C.CString("0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000")
 
+	f,err:=os.Open(filepath)
+
+	defer f.Close()
+
+	buf := make([]byte, 16)
+	n,err := f.Read(buf)
+
+	log.Println(n,buf)
+
+	if err!=nil{
+		return "0000000000000000"
+	}
+
+
+
 	filename:=C.CString(filepath)
 
 	cmode:=C.CString("rb")
@@ -50,7 +67,7 @@ func Fuzzy_hash_file(filepath string) (filehash string) {
 
 		return C.GoString(result)
 	}else {
-		return "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+		return "0000000000000000"
 	}
 
 
