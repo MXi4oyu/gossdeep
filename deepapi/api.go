@@ -12,7 +12,6 @@ import (
 	"fmt"
 	"unsafe"
 	"os"
-	"log"
 )
 
 //相似度
@@ -44,9 +43,7 @@ func Fuzzy_hash_file(filepath string) (filehash string) {
 	defer f.Close()
 
 	buf := make([]byte, 16)
-	n,err := f.Read(buf)
-
-	log.Println(n,buf)
+	_,err= f.Read(buf)
 
 	if err!=nil{
 		return "0000000000000000"
