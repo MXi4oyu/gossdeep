@@ -35,10 +35,12 @@ func Fuzzy_compare(hash1,hash2 string) (result int)  {
 }
 
 //提取文件模糊hash
-func Fuzzy_hash_file(filepath string) (filehash string) {
+func Fuzzy_hash_file(filePath string) (filehash string) {
 	result:=C.CString("0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000")
 
-	f,err:=os.Open(filepath)
+	defer C.free(unsafe.Pointer(result))
+
+	f,err:=os.Open(filePath)
 
 	defer f.Close()
 
@@ -51,7 +53,7 @@ func Fuzzy_hash_file(filepath string) (filehash string) {
 
 
 
-	filename:=C.CString(filepath)
+	filename:=C.CString(filePath)
 
 	cmode:=C.CString("rb")
 
