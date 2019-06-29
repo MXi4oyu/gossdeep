@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e83316ec-8165-49a0-8977-1f0bab1b3f3a" name="Default" comment="" />
+    <list default="true" id="e83316ec-8165-49a0-8977-1f0bab1b3f3a" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/deepapi/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/deepapi/api.go" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,8 +16,8 @@
       <file leaf-file-name="api.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/deepapi/api.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="21" column="7" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="7" />
+            <state relative-caret-position="120">
+              <caret line="39" column="173" selection-start-line="39" selection-start-column="173" selection-end-line="39" selection-end-column="173" />
               <folding>
                 <element signature="e#158#184#0" expanded="true" />
               </folding>
@@ -283,8 +285,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/deepapi/api.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="21" column="7" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="7" />
+        <state relative-caret-position="120">
+          <caret line="39" column="173" selection-start-line="39" selection-start-column="173" selection-end-line="39" selection-end-column="173" />
           <folding>
             <element signature="e#158#184#0" expanded="true" />
           </folding>

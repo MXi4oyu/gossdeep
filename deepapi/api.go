@@ -11,7 +11,6 @@ package deepapi
 import "C"
 import (
 	"unsafe"
-	"os"
 	"fmt"
 )
 
@@ -38,24 +37,15 @@ func Fuzzy_compare(hash1, hash2 string) (result int) {
 
 //提取文件模糊hash
 func Fuzzy_hash_file(filePath string) (filehash string) {
-	result := C.CString("0000000000000000")
+	result := C.CString("0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000")
 
 	defer C.free(unsafe.Pointer(result))
-
-	f, err := os.Open(filePath)
-
-	defer f.Close()
-
-	buf := make([]byte, 16)
-	_, err = f.Read(buf)
-
-	if err != nil {
-		return "0000000000000000"
-	}
 
 	filename := C.CString(filePath)
 
 	cmode := C.CString("rb")
+
+	defer C.free(unsafe.Pointer(cmode))
 
 	fp := C.fopen(filename, cmode)
 	defer C.fclose(fp)
