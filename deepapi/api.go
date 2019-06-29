@@ -1,91 +1,89 @@
 package deepapi
+
 /*
 #cgo CFLAGS: -I ./include
 #cgo LDFLAGS: -L ./lib -lfuzzy
 #include "fuzzy.h"
 #include <stdio.h>
 #include <stdint.h>
- */
+*/
 import "C"
 
 import (
 	"fmt"
-	"unsafe"
 	"os"
+	"unsafe"
 )
 
 //相似度
-func Fuzzy_compare(hash1,hash2 string) (result int)  {
+func Fuzzy_compare(hash1, hash2 string) (result int) {
 
-	ch1:=C.CString(hash1)
-	ch2:=C.CString(hash2)
+	ch1 := C.CString(hash1)
+	ch2 := C.CString(hash2)
+	defer C.free(unsafe.Pointer(ch1))
+	defer C.free(unsafe.Pointer(ch2))
 
 	var hashSimilarity C.int
-	hashSimilarity=0
-	hashSimilarity=C.fuzzy_compare(ch1,ch2)
+	hashSimilarity = 0
+	hashSimilarity = C.fuzzy_compare(ch1, ch2)
 
-	if(hashSimilarity>0){
+	if hashSimilarity > 0 {
 		return int(hashSimilarity)
-	}else{
-		return int(0);
+	} else {
+		return int(0)
 	}
-
-
 
 }
 
 //提取文件模糊hash
 func Fuzzy_hash_file(filePath string) (filehash string) {
-	result:=C.CString("0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000")
+	result := C.CString("0000000000000000")
 
 	defer C.free(unsafe.Pointer(result))
 
-	f,err:=os.Open(filePath)
+	f, err := os.Open(filePath)
 
 	defer f.Close()
 
 	buf := make([]byte, 16)
-	_,err= f.Read(buf)
+	_, err = f.Read(buf)
 
-	if err!=nil{
+	if err != nil {
 		return "0000000000000000"
 	}
 
+	filename := C.CString(filePath)
 
+	cmode := C.CString("rb")
 
-	filename:=C.CString(filePath)
-
-	cmode:=C.CString("rb")
-
-	fp:=C.fopen(filename,cmode)
+	fp := C.fopen(filename, cmode)
 	defer C.fclose(fp)
 
-	ret:=C.fuzzy_hash_file(fp,result)
+	ret := C.fuzzy_hash_file(fp, result)
 
-	if (ret==0) {
+	if ret == 0 {
 
 		return C.GoString(result)
-	}else {
+	} else {
 		return "0000000000000000"
 	}
-
 
 }
 
 //提取字符串的模糊hash
 func Fuzzy_hash_buf(str string) (strhash string) {
 
-	result:=C.CString("0")
-	bufdata:=str
-	chdata:=(*C.uchar)(unsafe.Pointer(C.CString(bufdata)))
-	clen:=C.uint32_t(len(bufdata))
-	ret:=C.fuzzy_hash_buf(chdata,clen,result)
-	if (ret==0){
+	result := C.CString("0")
+	defer C.free(unsafe.Pointer(result))
+	bufdata := str
+	chdata := (*C.uchar)(unsafe.Pointer(C.CString(bufdata)))
+	clen := C.uint32_t(len(bufdata))
+	ret := C.fuzzy_hash_buf(chdata, clen, result)
+	if ret == 0 {
 		fmt.Println(C.GoString(result))
 		return C.GoString(result)
-	}else{
+	} else {
 		return ""
 	}
 
 }
-
