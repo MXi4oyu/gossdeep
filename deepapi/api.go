@@ -12,8 +12,6 @@ import "C"
 import (
 	"unsafe"
 	"fmt"
-	"log"
-	"runtime/debug"
 )
 
 
@@ -50,14 +48,13 @@ func Fuzzy_hash_file(filePath string) (filehash string) {
 	defer C.free(unsafe.Pointer(cmode))
 
 	fp := C.fopen(filename, cmode)
+
+	if fp==nil{
+		return "0000000000000000"
+	}
+
 	defer C.fclose(fp)
 
-	defer func() {
-		if r := recover(); r != nil {
-			log.Println(r)
-			debug.PrintStack()
-		}
-	}()
 
 	ret:=C.int(-1)
 
