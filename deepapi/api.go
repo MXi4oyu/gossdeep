@@ -3,18 +3,15 @@ package deepapi
 /*
 #cgo CFLAGS: -I ./include
 #cgo LDFLAGS: -L ./lib -lfuzzy
-#cgo LDFLAGS: -lldap -llber
 #include "fuzzy.h"
 #include <stdio.h>
 #include <stdint.h>
 */
 import "C"
+import "fmt"
+import "os"
+import "unsafe"
 
-import (
-	"fmt"
-	"os"
-	"unsafe"
-)
 
 //相似度
 func Fuzzy_compare(hash1, hash2 string) (result int) {
