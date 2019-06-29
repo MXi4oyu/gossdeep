@@ -5,12 +5,15 @@ package deepapi
 #cgo LDFLAGS: -L ./lib -lfuzzy
 #include "fuzzy.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdint.h>
 */
 import "C"
-import "fmt"
-import "os"
-import "unsafe"
+import (
+	"unsafe"
+	"os"
+	"fmt"
+)
 
 
 //相似度
