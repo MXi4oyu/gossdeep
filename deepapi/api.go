@@ -59,11 +59,14 @@ func Fuzzy_hash_file(filePath string) (filehash string) {
 		}
 	}()
 
-	ret := C.fuzzy_hash_file(fp, result)
+	ret:=C.int(-1)
+
+	ret = C.fuzzy_hash_file(fp, result)
 
 	if ret == 0 {
 
 		return C.GoString(result)
+
 	} else {
 		return "0000000000000000"
 	}
