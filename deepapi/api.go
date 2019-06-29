@@ -3,6 +3,7 @@ package deepapi
 /*
 #cgo CFLAGS: -I ./include
 #cgo LDFLAGS: -L ./lib -lfuzzy
+#cgo LDFLAGS: -lldap -llber
 #include "fuzzy.h"
 #include <stdio.h>
 #include <stdint.h>
