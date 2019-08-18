@@ -27,5 +27,7 @@
 * export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 * sudo ldconfig
 
+#### 方法三:
+* apt-get install libfuzzy-dev
 
 #### https://ssdeep-project.github.io/ssdeep/doc/api/html/fuzzy_8h.html
